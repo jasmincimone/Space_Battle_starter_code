@@ -1,27 +1,53 @@
+//MY SHIP
 const myShip = {
     hull : 20,
     firepower: -5,
     accuracy : .7
 }
+//ALIEN SHIP
 //return Math.floor(Math.random() * (max - min + 1) + min)
-const alienShip = {
+const alienStats = {
     hull: Math.floor(Math.random() * (6 - 3 + 1) + 3),
     firepower: Math.floor(Math.random() * (4 - 2 + 1) + 2),
     accuracy: Math.floor(Math.random() * (8 - 6 + 1) +6) * .1
 }
-console.log(alienShip)
 
-var myAttack = () => {
-    if(myShip.accuracy > alienShip.accuracy){
-        console.log(alienShip.hull)
-        alienShip.hull = alienShip.hull + myShip.firepower
-        console.log(alienShip.hull)
+//CLASS TO CREATE ALIEN SHIPS
+class alienShip {
+    constructor (hull, firepower, accuracy){
+    this.hull = Math.floor(Math.random() * (6 - 3 + 1) + 3);
+    this.firepower = Math.floor(Math.random() * (4 - 2 + 1) + 2);
+    this.accuracy = Math.floor(Math.random() * (8 - 6 + 1) +6) * .1;
+    }
+}
+
+// let alien1 = new alienShip('Alien1', alienStats.hull, alienStats.firepower, alienStats.accuracy)
+
+let alienHorde = []
+
+//LOOP TO FILL ALIENHORDE ARRAY W/ NEW ALIENS
+for (counter = 0; counter <= 5; counter++){
+        alienHorde.push(new alienShip () )
+    }
+
+//FUNCTION TO ATTACK ALIEN SHIP
+var myAttack = (currentEnemy) => {
+    if(myShip.accuracy > currentEnemy.accuracy){
+//HULL OF ENEMY SHIP FOR ATTACK
+        console.log("The current enemy ship's hull is" + currentEnemy.hull)
+        currentEnemy.hull = currentEnemy.hull + myShip.firepower
+        console.log("ATTACKING")
+        //HULL OF ENEMY SHIP AFTER ATTACK
+        console.log("The current enemy ship's hull is" + currentEnemy.hull)
         console.log('Successful Hit!!!')
     } else {
         console.log('You Missed!')
     }
 }
-myAttack()
+console.log(alienHorde)
+myAttack(alienHorde[0])
+// myAttack()
+
 /*
 CODE SPACESHIP
 
