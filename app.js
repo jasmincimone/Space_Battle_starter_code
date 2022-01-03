@@ -1,4 +1,8 @@
-//MY SHIP
+//GAME OBJECT
+const game ={
+    run : function(){
+        
+        //MY SHIP
 const myShip = {
     hull : 15,
     firepower: -5,
@@ -46,31 +50,50 @@ var myAttack = (currentEnemy) => {
         alert("The current enemy ship's hull is" + currentEnemy.hull)
         console.log("The current enemy ship's hull is" + currentEnemy.hull)
         console.log('Successful Hit!!!')
-    } else
-    {
+        //CHECK IF ALIEN IS DEAD
+        if(currentEnemy.hull < 1) {
+            alert("You have DESTROYED the enemy!!!")
+            //REMOVES THE FIRST ENEMY FROM THE ALIEN HORDE ARRAY
+            alienHorde.shift()
+        //RULE FOR IF ALIEN IS ALIVE
+        }if(currentEnemy.hull >= 1){
+            let response = prompt("Would you like to ATTACK again, or RETREAT?")
+            if(resonse == "ATTACK"){
+                myAttack(alienHorde[0])
+            }
+        }
+    } else {
         alert("You missed! =( It is now the computer's turn.")
         console.log('You Missed!')
         console.log("Computer's Turn")
+        alienAttack(alienHorde[0])
     }
 }
 // console.log(alienHorde)
 // myAttack(alienHorde[0])
 // myAttack(alienHorde[1])
+
 //  FUNCTION FOR ALIEN ATTACK
 var alienAttack  = (currentAlienAttacking) => {
+    alert("The alien's weapons spin up and FIRE!!!")
     if(currentAlienAttacking.accuracy > myShip.accuracy){
         //HULL OF ENEMY SHIP FOR ATTACK
+                alert("Your ship's hull is " + myShip.hull)
                 console.log("My ship's hull is " + myShip.hull)
                 // subtract currentenemy attacking firepower from our hull
                 myShip.hull = myShip.hull - currentAlienAttacking.firepower
-                console.log("Enemy ATTACKING!!")
+
+                alert('Your ship has been hit!')
                 //HULL OF ENEMY SHIP AFTER ATTACK
+                alert("You ship's hull is now" + myShip.hull)
                 console.log("My ships hull is " + myShip.hull)
                 console.log('Successful Hit!!!')
-            } else
-            {
+            } else{
+                alert("THEY MISSED!!!")
                 console.log('You Missed!')
+                alert("YOUR TURN!")
                 console.log("Player's Turn")
+                myAttack(alienHorde[0])
             }
         }
 // alienAttack(alienHorde[0])
@@ -102,6 +125,11 @@ window.onload = function() {
     }
 }
 
+
+    }
+}
+
+game.run()
 
 
 //PROMPT DOCUMENTATION
