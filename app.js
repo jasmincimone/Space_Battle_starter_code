@@ -1,6 +1,6 @@
 //MY SHIP
 const myShip = {
-    hull : 20,
+    hull : 15,
     firepower: -5,
     accuracy : .7
 }
@@ -35,15 +35,20 @@ for (counter = 0; counter <= 5; counter++){
 var myAttack = (currentEnemy) => {
     if(myShip.accuracy > currentEnemy.accuracy){
 //HULL OF ENEMY SHIP FOR ATTACK
+        alert("The current enemy ship's hull is" + currentEnemy.hull)
         console.log("The current enemy ship's hull is" + currentEnemy.hull)
         // take my ships firepower from the current enemy
         currentEnemy.hull = currentEnemy.hull + myShip.firepower
+        alert("ATTACKING")
         console.log("ATTACKING")
         //HULL OF ENEMY SHIP AFTER ATTACK
+        alert("SUCCESSFUL HIT!!!")
+        alert("The current enemy ship's hull is" + currentEnemy.hull)
         console.log("The current enemy ship's hull is" + currentEnemy.hull)
         console.log('Successful Hit!!!')
     } else
     {
+        alert("You missed! =( It is now the computer's turn.")
         console.log('You Missed!')
         console.log("Computer's Turn")
     }
@@ -55,7 +60,7 @@ var myAttack = (currentEnemy) => {
 var alienAttack  = (currentAlienAttacking) => {
     if(currentAlienAttacking.accuracy > myShip.accuracy){
         //HULL OF ENEMY SHIP FOR ATTACK
-                console.log("My ship's hull iss " + myShip.hull)
+                console.log("My ship's hull is " + myShip.hull)
                 // subtract currentenemy attacking firepower from our hull
                 myShip.hull = myShip.hull - currentAlienAttacking.firepower
                 console.log("Enemy ATTACKING!!")
@@ -68,11 +73,40 @@ var alienAttack  = (currentAlienAttacking) => {
                 console.log("Player's Turn")
             }
         }
-alienAttack(alienHorde[0])
+// alienAttack(alienHorde[0])
 // console.log(alienHorde)
 // myAttack(alienHorde[0])
 // myAttack()
 
+
+//----------------------------
+//PROMPTS FOR GAME
+//----------------------------
+
+window.onload = function() { 
+    alert("WELCOME TO ALIEN BATTLESHIP")
+    
+    alert("Rules of the Game: A game round would look like this: You attack the first alien ship - If the ship survives, it attacks you - If you survive, you attack the ship again - If it survives, it attacks you again, Etc. - If you destroy the ship, you have the option to ATTACK the next ship or to RETREAT.")
+    alert("If you retreat, the game is over. - You win the game if you destroy all of the aliens. - You lose the game if you are destroyed.")
+    alert("LET'S GOOO!!!!")
+    alert("You are moving through space when an alien ship approaches")
+    
+    //PROMPT TO MAKE FIRST ATTACK
+    let response = prompt("Would you like to ATTACK, or RETREAT")
+    
+    if(response == "ATTACK"){
+        alert("You line up your laser and attack")
+        myAttack(alienHorde[0])
+    } else {
+        alert("You's a bitch")
+    }
+}
+
+
+
+//PROMPT DOCUMENTATION
+// var name = prompt("What is your name")
+// alert('Hello ' + name)
 /*
 CODE SPACESHIP
 
