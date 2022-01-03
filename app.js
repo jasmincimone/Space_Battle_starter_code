@@ -57,6 +57,10 @@ var myAttack = (currentEnemy) => {
               //REMOVES THE FIRST ENEMY FROM THE ALIEN HORDE ARRAY
           alienHorde.shift()
             alert("You have DESTROYED the enemy!!!")
+            alert("There are" + alienHorde.length + "ships left.")
+            if(alienHorde.length === 0){
+                alert("YOU HAVE WON!!!!")
+            }
             let response = prompt("Would you like to attack the next enemy??? YES or NO")
             if(response == "YES"){
                 alert('Next enemy approaches')
@@ -66,8 +70,17 @@ var myAttack = (currentEnemy) => {
         //RULE FOR IF ALIEN IS ALIVE
         }if(currentEnemy.hull >= 1){
             let response = prompt("Would you like to ATTACK again, or RETREAT?")
-            if(response == "ATTACK"){
+            if (response == "ATTACK"){
                 myAttack(alienHorde[0])
+            }
+            if (response !== "ATTACK"){
+                alert("You are about to RETREAT...")
+                let retreatResponse = prompt("Are you sure you want to RETREAT? Y or N")
+                if(retreatResponse == "Y" || "y"){
+                    alert("GAME OVER.")
+                }else{
+                    myAttack(alienHorde[0])
+                }
             }
         }
     } else {
@@ -95,9 +108,21 @@ var alienAttack  = (currentAlienAttacking) => {
                 alert('Your ship has been hit!')
                 //HULL OF ENEMY SHIP AFTER ATTACK
                 alert("You ship's hull is now" + myShip.hull)
+                if(myShip.hull === 0){
+                    alert("GAME OVER.")
+                }
                 let response = prompt("Would you like to ATTACK again, or RETREAT?")
             if (response == "ATTACK"){
                 myAttack(alienHorde[0])
+            }
+            if (response !== "ATTACK"){
+                alert("You are about to RETREAT...")
+                let retreatResponse = prompt("Are you sure you want to RETREAT? Y or N")
+                if(retreatResponse == "Y" || "y"){
+                    alert("GAME OVER.")
+                }else{
+                    myAttack(alienHorde[0])
+                }
             }
                 console.log("My ships hull is " + myShip.hull)
                 console.log('Successful Hit!!!')
@@ -128,13 +153,19 @@ window.onload = function() {
     alert("You are moving through space when an alien ship approaches")
     
     //PROMPT TO MAKE FIRST ATTACK
-    let response = prompt("Would you like to ATTACK, or RETREAT")
-    
-    if(response == "ATTACK"){
+    let response = prompt("Would you like to ATTACK, or RETREAT?")
+    if (response == "ATTACK"){
         alert("You line up your laser and attack")
         myAttack(alienHorde[0])
-    } else {
-        alert("You's a bitch")
+    }
+    if (response !== "ATTACK"){
+        alert("You are about to RETREAT...")
+        let retreatResponse = prompt("Are you sure you want to RETREAT? Y or N")
+        if(retreatResponse == "Y" || "y"){
+            alert("GAME OVER.")
+        }else{
+            myAttack(alienHorde[0])
+        }
     }
 }
 
