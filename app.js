@@ -23,11 +23,12 @@ class alienShip {
 
 // let alien1 = new alienShip('Alien1', alienStats.hull, alienStats.firepower, alienStats.accuracy)
 
+//Empty array to push new aliens info
 let alienHorde = []
 
 //LOOP TO FILL ALIENHORDE ARRAY W/ NEW ALIENS
 for (counter = 0; counter <= 5; counter++){
-        alienHorde.push(new alienShip () )
+        alienHorde.push(new alienShip ())
     }
 
 //FUNCTION TO ATTACK ALIEN SHIP
@@ -35,17 +36,41 @@ var myAttack = (currentEnemy) => {
     if(myShip.accuracy > currentEnemy.accuracy){
 //HULL OF ENEMY SHIP FOR ATTACK
         console.log("The current enemy ship's hull is" + currentEnemy.hull)
+        // take my ships firepower from the current enemy
         currentEnemy.hull = currentEnemy.hull + myShip.firepower
         console.log("ATTACKING")
         //HULL OF ENEMY SHIP AFTER ATTACK
         console.log("The current enemy ship's hull is" + currentEnemy.hull)
         console.log('Successful Hit!!!')
-    } else {
+    } else
+    {
         console.log('You Missed!')
+        console.log("Computer's Turn")
     }
 }
-console.log(alienHorde)
-myAttack(alienHorde[0])
+// console.log(alienHorde)
+// myAttack(alienHorde[0])
+// myAttack(alienHorde[1])
+//  FUNCTION FOR ALIEN ATTACK
+var alienAttack  = (currentAlienAttacking) => {
+    if(currentAlienAttacking.accuracy > myShip.accuracy){
+        //HULL OF ENEMY SHIP FOR ATTACK
+                console.log("My ship's hull iss " + myShip.hull)
+                // subtract currentenemy attacking firepower from our hull
+                myShip.hull = myShip.hull - currentAlienAttacking.firepower
+                console.log("Enemy ATTACKING!!")
+                //HULL OF ENEMY SHIP AFTER ATTACK
+                console.log("My ships hull is " + myShip.hull)
+                console.log('Successful Hit!!!')
+            } else
+            {
+                console.log('You Missed!')
+                console.log("Player's Turn")
+            }
+        }
+alienAttack(alienHorde[0])
+// console.log(alienHorde)
+// myAttack(alienHorde[0])
 // myAttack()
 
 /*
