@@ -37,7 +37,8 @@ for (counter = 0; counter <= 5; counter++){
 
 //FUNCTION TO ATTACK ALIEN SHIP
 var myAttack = (currentEnemy) => {
-    if(myShip.accuracy > currentEnemy.accuracy){
+    var accuracyCheck = (Math.floor(Math.random() * (8 - 6 + 1) +6) * .1)
+    if(myShip.accuracy > accuracyCheck){
 //HULL OF ENEMY SHIP FOR ATTACK
         alert("The current enemy ship's hull is" + currentEnemy.hull)
         console.log("The current enemy ship's hull is" + currentEnemy.hull)
@@ -50,15 +51,22 @@ var myAttack = (currentEnemy) => {
         alert("The current enemy ship's hull is" + currentEnemy.hull)
         console.log("The current enemy ship's hull is" + currentEnemy.hull)
         console.log('Successful Hit!!!')
+        
         //CHECK IF ALIEN IS DEAD
         if(currentEnemy.hull < 1) {
+              //REMOVES THE FIRST ENEMY FROM THE ALIEN HORDE ARRAY
+          alienHorde.shift()
             alert("You have DESTROYED the enemy!!!")
-            //REMOVES THE FIRST ENEMY FROM THE ALIEN HORDE ARRAY
-            alienHorde.shift()
+            let response = prompt("Would you like to attack the next enemy??? YES or NO")
+            if(response == "YES"){
+                alert('Next enemy approaches')
+                myAttack(alienHorde[0])
+            }
+          
         //RULE FOR IF ALIEN IS ALIVE
         }if(currentEnemy.hull >= 1){
             let response = prompt("Would you like to ATTACK again, or RETREAT?")
-            if(resonse == "ATTACK"){
+            if(response == "ATTACK"){
                 myAttack(alienHorde[0])
             }
         }
@@ -75,8 +83,9 @@ var myAttack = (currentEnemy) => {
 
 //  FUNCTION FOR ALIEN ATTACK
 var alienAttack  = (currentAlienAttacking) => {
+    var accuracyCheck = (Math.floor(Math.random() * (8 - 6 + 1) +6) * .1)
     alert("The alien's weapons spin up and FIRE!!!")
-    if(currentAlienAttacking.accuracy > myShip.accuracy){
+    if(currentAlienAttacking.accuracy > accuracyCheck){
         //HULL OF ENEMY SHIP FOR ATTACK
                 alert("Your ship's hull is " + myShip.hull)
                 console.log("My ship's hull is " + myShip.hull)
@@ -86,6 +95,10 @@ var alienAttack  = (currentAlienAttacking) => {
                 alert('Your ship has been hit!')
                 //HULL OF ENEMY SHIP AFTER ATTACK
                 alert("You ship's hull is now" + myShip.hull)
+                let response = prompt("Would you like to ATTACK again, or RETREAT?")
+            if (response == "ATTACK"){
+                myAttack(alienHorde[0])
+            }
                 console.log("My ships hull is " + myShip.hull)
                 console.log('Successful Hit!!!')
             } else{
